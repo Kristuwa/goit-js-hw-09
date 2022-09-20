@@ -2,7 +2,8 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-const randomColor = getRandomHexColor();
+const DELAY = 1000;
+let timeId = null;
 
 const refs = {
   startBtn: document.querySelector('button[data-start]'),
@@ -10,12 +11,19 @@ const refs = {
 };
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
-refs.stoptBtn.addEventListener('click', onStopBtnClick);
+refs.stopBtn.addEventListener('click', onStopBtnClick);
 
 function onStartBtnClick() {
-  setInterval(() => {
-    document.body.style.backgroundColor = randomColor;
-  }, 1000);
+  timeId = setInterval(() => {
+    document.body.style.backgroundColor = getRandomHexColor();
+    //  console.log('Меняю цвет');
+  }, DELAY);
+
+  refs.startBtn.disabled = timeId;
 }
 
-function onStopBtnClick() {}
+function onStopBtnClick() {
+  clearInterval(timeId);
+  //   console.log('таймер снят');
+  refs.startBtn.disabled = !timeId;
+}
