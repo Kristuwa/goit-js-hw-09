@@ -36,9 +36,8 @@ flatpickr('input#datetime-picker', options);
 const fp = document.querySelector('input#datetime-picker')._flatpickr;
 
 const timer = {
-  timeId: null,
   start() {
-    timeId = setInterval(() => {
+    const timeId = setInterval(() => {
       const timeNow = Date.now();
       const timeSelect = fp.selectedDates[0].getTime();
       const delay = timeSelect - timeNow;
