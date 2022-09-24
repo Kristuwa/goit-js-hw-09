@@ -35,31 +35,24 @@ const options = {
 flatpickr('input#datetime-picker', options);
 const fp = document.querySelector('input#datetime-picker')._flatpickr;
 
-const timer = {
-  start() {
-    const timeId = setInterval(() => {
-      const timeNow = Date.now();
-      const timeSelect = fp.selectedDates[0].getTime();
-      const delay = timeSelect - timeNow;
-      const timeDelay = convertMs(delay);
-      updateClockContent(timeDelay);
+function timerStart() {
+  const timeId = setInterval(() => {
+    const timeNow = Date.now();
+    const timeSelect = fp.selectedDates[0].getTime();
+    const delay = timeSelect - timeNow;
+    const timeDelay = convertMs(delay);
+    updateClockContent(timeDelay);
 
-      const { days, hours, minutes, seconds } = timeDelay;
+    const { days, hours, minutes, seconds } = timeDelay;
 
-      if (
-        days === 0 &&
-        hours === '00' &&
-        minutes === '00' &&
-        seconds === '00'
-      ) {
-        clearInterval(timeId);
-      }
-    }, 1000);
-  },
-};
+    if (days === 0 && hours === '00' && minutes === '00' && seconds === '00') {
+      clearInterval(timeId);
+    }
+  }, 1000);
+}
 
 function onStartClick() {
-  timer.start();
+  timerStart();
   refs.startBtn.disabled = true;
 }
 
