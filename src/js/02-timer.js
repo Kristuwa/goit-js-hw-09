@@ -41,7 +41,7 @@ const timer = {
       const timeNow = Date.now();
       const timeSelect = fp.selectedDates[0].getTime();
       const delay = timeSelect - timeNow;
-      timeDelay = convertMs(delay);
+      const timeDelay = convertMs(delay);
       updateClockContent(timeDelay);
 
       const { days, hours, minutes, seconds } = timeDelay;
